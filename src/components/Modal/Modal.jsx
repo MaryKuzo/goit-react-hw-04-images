@@ -13,11 +13,19 @@ const Modal = ({ largeImage, onClose }) => {
         onClose();
       }
     };
+      const handleScroll = (e) => {
+      e.preventDefault();
+    };
 
     window.addEventListener('keydown', handleKeyDown);
+    document.body.style.overflow = 'hidden';
+    document.body.addEventListener('touchmove', handleScroll, { passive: false });
+
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'auto';
+      document.body.removeEventListener('touchmove', handleScroll);
     };
   }, [onClose]);
 
